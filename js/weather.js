@@ -1,3 +1,4 @@
+//⏰Feature #1
 let currentTime = new Date();
 
 function formatDate(greenwhichMeanTime) {
@@ -11,26 +12,8 @@ function formatDate(greenwhichMeanTime) {
     "Saturday",
   ];
 
-  // let months = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  //   "August",
-  //   "September",
-  //   "October",
-  //   "November",
-  //   "December"
-  // ];
-
   let dateTime = document.querySelector("#date-time");
-
-  // let currentYear = greenwhichMeanTime.getFullYear();
   let currentDay = days[greenwhichMeanTime.getDay()]; // Map
-  // let currentMonth = months[greenwhichMeanTime.getMonth()]; // Map
   let currentDate = greenwhichMeanTime.getDate();
   let hour = greenwhichMeanTime.getHours();
   let minutes = greenwhichMeanTime.getMinutes();
@@ -42,15 +25,62 @@ function formatDate(greenwhichMeanTime) {
 
 formatDate(currentTime);
 
-// 🕵️‍♀️Feature #2
-const search = function (event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
+const displayWeatherInfo = function (response) {
+  // console.log(response);
+  document.querySelector("#city-name").innerHTML = response.data.name;
+  let roundTempNum = Math.round(response.data.main.temp);
+  document.querySelector("#weather-temp").innerHTML = `${roundTempNum}°C`;
+  document.querySelector("#weather-description").innerHTML =
+    response.data.weather[0].description;
+};
 
-  let h1 = document.querySelector("#city-name");
-  h1.innerHTML = `${searchInput.value}`;
+const searchCity = function (cityName) {
+  let apiKey = "597c40c39084687093b091cd48b366f8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherInfo);
+};
+
+const searchInfo = function (event) {
+  event.preventDefault();
+  let cityName = document.querySelector("#search-input").value;
+  searchCity(cityName);
 };
 
 let form = document.querySelector("#search-form");
+form.addEventListener("submit", searchInfo);
 
-form.addEventListener("submit", search);
+// Current Location Button
+const searchCurrentLocation = function (position) {
+  let apiKey = "597c40c39084687093b091cd48b366f8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherInfo);
+};
+
+const currentLocation = function (event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchCurrentLocation);
+};
+
+const locationButton = document.querySelector("#location-btn");
+locationButton.addEventListener("click", currentLocation);
+
+searchCity("London");
+
+// celsius Convert Function
+const celsiusInfo = function (event) {
+  event.preventDefault();
+  const tempC = document.querySelector("#temperature");
+  tempC.innerHTML = 12;
+};
+const celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", celsiusInfo);
+
+//fahrenheit Convert Function
+const fahrenheitInfo = function (event) {
+  event.preventDefault();
+  const tempF = document.querySelector("#temperature");
+  tempF.innerHTML = 48;
+};
+
+const fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", fahrenheitInfo);
