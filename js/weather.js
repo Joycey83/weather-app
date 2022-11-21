@@ -1,4 +1,4 @@
-//⏰Feature #1
+// Time function
 let currentTime = new Date();
 
 function formatDate(greenwhichMeanTime) {
