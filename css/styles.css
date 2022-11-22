@@ -109,5 +109,6 @@ a.credit {
   display: block;
   font-size: 25px;
   margin-left: 5%;
-  margin-top: 250px;
+  position: relative;
+  bottom: 30px;
 }
