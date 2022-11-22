@@ -112,3 +112,7 @@ a.credit {
   position: relative;
   top: 30px;
 }
+
+.hosting:hover {
+  color: azure;
+}
