@@ -113,6 +113,6 @@ a.credit {
   top: 30px;
 }
 
-.hosting:hover {
+.hosting a:hover {
   color: azure;
 }
