@@ -123,5 +123,9 @@ a.credit {
   margin-left: 12%;
   position: relative;
   top: 30px;
+}
+
+.hosting-2 a:hover {
   text-decoration: none;
+  color: azure;
 }
