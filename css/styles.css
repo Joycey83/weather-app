@@ -105,8 +105,9 @@ a.credit {
   margin-top: 3%;
 }
 
-.hosting {
+a.hosting {
   display: block;
   font-size: 25px;
   margin-left: 5%;
+  margin-top: 1%;
 }
