@@ -106,6 +106,8 @@ a.credit {
 }
 
 .hosting {
+  display: block;
   font-size: 25px;
-  margin: 0 auto;
+  margin-left: 5%;
+  margin-top: 3%;
 }
